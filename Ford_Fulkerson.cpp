@@ -2,14 +2,20 @@
 #include <limits.h>
 #include <string.h>
 #include <queue>
+#include <algorithm>
+#include <pybind11/stl.h>
+#include <pybind11/pybind11.h>
+#include <vector>
 
 #include "Graph.hpp"
+#include "MaxFlow.hpp"
 
 using namespace std;
+namespace py = pybind11;
 
 #define V 6
 
-bool bfs(Graph &rGraph, int s, int t, int parent[]) {
+bool bfs(Graph &graph, int s, int t, int parent[]) {
     bool visited[V];
     memset(visited, 0, sizeof(visited));
 
@@ -23,7 +29,7 @@ bool bfs(Graph &rGraph, int s, int t, int parent[]) {
         q.pop();
 
         for(int v = 0; v < V; v++) {
-            if(visited[v] == false && rGraph.getEdge(u, v) > 0) {
+            if(visited[v] == false && graph.getEdge(u, v) > 0) {
                 q.push(v);
                 parent[v] = u;
                 visited[v] = true;
@@ -34,27 +40,60 @@ bool bfs(Graph &rGraph, int s, int t, int parent[]) {
     return (visited[t] == true);
 }
 
-int fordFulkerson(Graph &graph, int s, int t) {
+MaxFlow fordFulkerson(Graph &graph, int s, int t) {
     int u, v;
     int parent[V];
     int max_flow = 0;
+    MaxFlow result;
+    // vector<vector<int>> augmentingPaths;
+
     while(bfs(graph, s, t, parent)) {
         int path_flow = INT_MAX;
+        vector<int> currentPath;
+
         for(v = t; v != s; v = parent[v]) {
             u = parent[v];
             path_flow = min(path_flow, graph.getEdge(u, v));
+            currentPath.push_back(v);
         }
+
+        currentPath.push_back(s);
+        reverse(currentPath.begin(), currentPath.end());
+        // augmentingPaths.push_back(currentPath);
+        result.addAugmentingPath(currentPath, path_flow);
 
         for(v = t; v != s; v = parent[v]) {
             u = parent[v];
             graph.modifyEdge(u, v, path_flow, false);
             graph.modifyEdge(v, u, path_flow, true);
         }
-
+        
         max_flow += path_flow;
     }
-    
-    return max_flow;
+    result.setMaxFlow(max_flow);
+
+    return result;
+}
+
+PYBIND11_MODULE(_Ford_Fulkerson, m) {
+	m.doc() = "Ford_Fulkerson Application";
+	
+	py::class_<Graph>(m, "Graph")
+		.def(py::init<int>())
+		.def("addEdge", &Graph::addEdge)
+		.def("removeEdge", &Graph::removeEdge)
+		.def("getEdge", &Graph::getEdge)
+		.def("modifyEdge", &Graph::modifyEdge);
+		
+	py::class_<MaxFlow>(m, "MaxFlow")
+		.def("addAugmentingPath", &MaxFlow::addAugmentingPath)
+		.def("setMaxFlow", &MaxFlow::setMaxFlow)
+		.def("getMaxFlow", &MaxFlow::getMaxFlow)
+		.def("getAugmentingPaths", &MaxFlow::getAugmentingPaths)
+		.def("getAugmentingPathsCapacities", &MaxFlow::getAugmentingPathsCapacities);
+	
+	m.def("bfs", &bfs);
+	m.def("fordFulkerson", &fordFulkerson);
 }
 
 int main() {
@@ -71,7 +110,24 @@ int main() {
     g.addEdge(4, 3, 7);
     g.addEdge(4, 5, 4);
 
-    g.toString();
+    // g.toString();
 
-    cout << "The maximum possible flow is " << fordFulkerson(g, 0, 5) << endl;
+    // cout << "The maximum possible flow is " << fordFulkerson(g, 0, 5) << endl;
+    
+    MaxFlow result;
+    result = fordFulkerson(g, 0, 5);
+    
+    cout << "Max Flow: " << result.getMaxFlow() << endl;
+    cout << "Augmenting Paths: " << endl;
+    
+    vector<vector<int>> allPaths = result.getAugmentingPaths();
+    vector<int> allCapacities = result.getAugmentingPathsCapacities();
+    
+    for (size_t i = 0; i < allPaths.size(); i++) {
+        cout << "Path " << i + 1 << " (Capacity: " << allCapacities[i] << "): ";
+        for (int node : allPaths[i]) {
+            cout << node << " ";
+        }
+        cout << endl;
+    }
 }

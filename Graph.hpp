@@ -1,6 +1,6 @@
 #pragma once
-#include <iostream>
-using namespace std;
+//#include <iostream>
+//using namespace std;
 
 class Graph {
     private:
@@ -8,7 +8,7 @@ class Graph {
         int numVertices;
 
     public:
-        // Initialize the matrix to zero
+        // Constructor
         Graph(int numVertices) {
             this->numVertices = numVertices;
             adjMatrix = new int*[numVertices];
@@ -29,13 +29,23 @@ class Graph {
         }
 
         // Print the martix
-        void toString() {
+        /*void toString() {
             for (int i = 0; i < numVertices; i++) {
                 cout << i << " : ";
                 for (int j = 0; j < numVertices; j++)
                     cout << adjMatrix[i][j] << " ";
                 cout << "\n";
             }
+        }*/
+        
+        // Return adjMatrix
+        int** matrix() const {
+        	return adjMatrix;
+        }
+        
+        // Return numVertices
+        int vnum() const {
+        	return numVertices;
         }
         
         // Return edges
