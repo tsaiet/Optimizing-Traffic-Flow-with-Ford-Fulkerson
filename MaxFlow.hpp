@@ -1,13 +1,10 @@
 #include <iostream>
 #include <vector>
-// #include <climits>
-
-using namespace std;
 
 class MaxFlow {
 public:
-    vector<vector<int>> augmentingPaths;
-    vector<int> pathCapacities;
+    std::vector<std::vector<int>> augmentingPaths;
+    std::vector<int> pathCapacities;
     int max_flow;
 
     // Constructor
@@ -16,7 +13,7 @@ public:
     }
 
     // add Augmenting Path and capacity
-    void addAugmentingPath(vector<int> path, int capacity) {
+    void addAugmentingPath(std::vector<int> path, int capacity) {
         augmentingPaths.push_back(path);
         pathCapacities.push_back(capacity);
     }
@@ -32,37 +29,12 @@ public:
     }
 
     // get Augmenting Paths
-    vector<vector<int>> getAugmentingPaths() {
+    std::vector<std::vector<int>> getAugmentingPaths() {
         return augmentingPaths;
     }
     
     // get capacity
-    vector<int> getAugmentingPathsCapacities() {
+    std::vector<int> getAugmentingPathsCapacities() {
         return pathCapacities;
     }
 };
-
-/*int main() {
-    MaxFlowResult result;
-
-    vector<int> path1 = {1, 2, 3};
-    result.addAugmentingPath(path1);
-
-    vector<int> path2 = {4, 5, 6};
-    result.addAugmentingPath(path2);
-
-    result.setMaxFlow(20);
-
-    cout << "Max Flow: " << result.getMaxFlow() << endl;
-
-    cout << "Augmenting Paths: " << endl;
-    for (vector<int> path : result.getAugmentingPaths()) {
-        for (int node : path) {
-            cout << node << " ";
-        }
-        cout << endl;
-    }
-
-    return 0;
-}*/
-
