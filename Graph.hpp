@@ -1,6 +1,4 @@
 #pragma once
-//#include <iostream>
-//using namespace std;
 
 class Graph {
     private:
@@ -27,16 +25,6 @@ class Graph {
         void removeEdge(int i, int j) {
             adjMatrix[i][j] = 0;
         }
-
-        // Print the martix
-        /*void toString() {
-            for (int i = 0; i < numVertices; i++) {
-                cout << i << " : ";
-                for (int j = 0; j < numVertices; j++)
-                    cout << adjMatrix[i][j] << " ";
-                cout << "\n";
-            }
-        }*/
         
         // Return adjMatrix
         int** matrix() const {

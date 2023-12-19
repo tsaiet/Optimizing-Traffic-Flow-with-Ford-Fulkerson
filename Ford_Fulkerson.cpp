@@ -10,7 +10,6 @@
 #include "Graph.hpp"
 #include "MaxFlow.hpp"
 
-using namespace std;
 namespace py = pybind11;
 
 #define V 6
@@ -19,7 +18,7 @@ bool bfs(Graph &graph, int s, int t, int parent[]) {
     bool visited[V];
     memset(visited, 0, sizeof(visited));
 
-    queue<int> q;
+    std::queue<int> q;
     q.push(s);
     visited[s] = true;
     parent[s] = -1;
@@ -49,11 +48,11 @@ MaxFlow fordFulkerson(Graph &graph, int s, int t) {
 
     while(bfs(graph, s, t, parent)) {
         int path_flow = INT_MAX;
-        vector<int> currentPath;
+        std::vector<int> currentPath;
 
         for(v = t; v != s; v = parent[v]) {
             u = parent[v];
-            path_flow = min(path_flow, graph.getEdge(u, v));
+            path_flow = std::min(path_flow, graph.getEdge(u, v));
             currentPath.push_back(v);
         }
 
@@ -117,17 +116,17 @@ int main() {
     MaxFlow result;
     result = fordFulkerson(g, 0, 5);
     
-    cout << "Max Flow: " << result.getMaxFlow() << endl;
-    cout << "Augmenting Paths: " << endl;
+    std::cout << "Max Flow: " << result.getMaxFlow() << std::endl;
+    std::cout << "Augmenting Paths: " << std::endl;
     
-    vector<vector<int>> allPaths = result.getAugmentingPaths();
-    vector<int> allCapacities = result.getAugmentingPathsCapacities();
+    std::vector<std::vector<int>> allPaths = result.getAugmentingPaths();
+    std::vector<int> allCapacities = result.getAugmentingPathsCapacities();
     
     for (size_t i = 0; i < allPaths.size(); i++) {
-        cout << "Path " << i + 1 << " (Capacity: " << allCapacities[i] << "): ";
+        std::cout << "Path " << i + 1 << " (Capacity: " << allCapacities[i] << "): ";
         for (int node : allPaths[i]) {
-            cout << node << " ";
+            std::cout << node << " ";
         }
-        cout << endl;
+        std::cout << std::endl;
     }
 }
