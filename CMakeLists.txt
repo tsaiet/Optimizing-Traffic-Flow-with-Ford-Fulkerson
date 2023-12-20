@@ -4,6 +4,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(Ford_Fulkerson)
 
 include_directories(/usr/include/python3.10)
+include_directories(${Ford_Fulkerson_SOURCE_DIR}/includes)
 
 set(
     CMAKE_LIBRARY_OUTPUT_DIRECTORY
@@ -11,7 +12,7 @@ set(
 )
 
 find_package(pybind11 REQUIRED)
-pybind11_add_module(Ford_Fulkerson Ford_Fulkerson.cpp)
+pybind11_add_module(Ford_Fulkerson ${Ford_Fulkerson_SOURCE_DIR}/includes/Ford_Fulkerson.cpp)
 
 # instruction:
 # cmake -B build
