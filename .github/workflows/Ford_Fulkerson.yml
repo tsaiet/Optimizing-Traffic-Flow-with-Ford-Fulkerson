@@ -1,4 +1,4 @@
-name: hw6
+name: Ford_Fulkerson
 
 on:
   push:
@@ -22,24 +22,25 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Install dependency
-      run: |
-        sudo apt-get -q update
-        sudo apt-get -qy install \
-            curl build-essential make cmake libc6-dev \
-            gcc g++ gfortran intel-mkl-full \
-            python3 python3-pip python3-pytest \
-            python3-numpy python3-scipy python3-pandas python3-matplotlib \
-            jupyter
-        cd /usr/bin ; sudo ln -sf py.test-3 py.test
+      run: |    
+        sudo apt-get update
+        sudo apt install -qy make
+        sudo apt install -qy cmake
+        sudo apt install -qy python3 
+        sudo apt install -qy python3-pip  
+        pip3 install pybind11
+        pip3 install pybind11-global 
+        pip3 install pytest
+        pip3 install numpy
 
     - name: Configure CMake
       run: |
-        run: cmake -B ${{github.workspace}}/build -S ${{github.workspace}} -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+        cmake -B ${{github.workspace}}/build
         
     - name: Build CMake
       run: |
-        run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+        cmake --build ${{github.workspace}}/build
         
     - name: Test
       run: |
-        run: python3 -m pytest
+        python3 -m pytest
