@@ -74,7 +74,7 @@ MaxFlow fordFulkerson(Graph &graph, int s, int t) {
     return result;
 }
 
-PYBIND11_MODULE(Ford_Fulkerson, m) {
+PYBIND11_MODULE(_Ford_Fulkerson, m) {
 	m.doc() = "Ford_Fulkerson Application";
 	
 	py::class_<Graph>(m, "Graph")

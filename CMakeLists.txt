@@ -1,17 +1,13 @@
 cmake_minimum_required(VERSION 3.12)
 set(CMAKE_CXX_STANDARD 17 CACHE STRING "C++ version selection")
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-project(Ford_Fulkerson)
+project(Optimizing-Traffic-Flow-with-Ford-Fulkerson)
 
 include_directories(/usr/include/python3.10)
 
-set(
-    CMAKE_LIBRARY_OUTPUT_DIRECTORY
-    ${Ford_Fulkerson_SOURCE_DIR}/Ford_Fulkerson
-)
 
 find_package(pybind11 REQUIRED)
-pybind11_add_module(Ford_Fulkerson Ford_Fulkerson.cpp)
+pybind11_add_module(_Ford_Fulkerson Ford_Fulkerson.cpp)
 
 # instruction:
 # cmake -B build
