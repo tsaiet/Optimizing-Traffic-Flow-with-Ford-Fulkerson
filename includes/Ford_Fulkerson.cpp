@@ -12,7 +12,7 @@
 
 namespace py = pybind11;
 
-#define V 6
+#define V 30
 
 bool bfs(Graph &graph, int s, int t, int parent[]) {
     bool visited[V];

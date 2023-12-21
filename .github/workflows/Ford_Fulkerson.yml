@@ -32,6 +32,9 @@ jobs:
         pip3 install pybind11-global 
         pip3 install pytest
         pip3 install numpy
+        pip3 install networkx
+        pip3 install notebook
+        pip3 install matplotlib
 
     - name: Configure CMake
       run: |
