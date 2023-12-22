@@ -3,17 +3,17 @@ Optimizing Traffic Flow with Ford-Fulkerson
 =================
 
 .. .. This is a template to specify what your project is and the execution plan.  You
-.. will find it is difficult to plan for things that you are not sure about.  Do
+.. will find it difficult to plan for things that you are not sure about.  Do
 .. your best.
 
 .. .. You are encouraged to use this plain-text `reStructuredText
 ..   <https://docutils.sourceforge.io/rst.html>`__ format.  :download:`Download
 ..   this file. <project_template.rst>`
 
-.. .. Please do give your project a name that clearly states the subject and is short
+.. .. Please give your project a name that clearly states the subject and is short
 .. enough for people to remember.
 
-.. .. Additional documents or files may be used.  They should be added in the
+.. .. Additional documents or files may be used.  They should be added to the
 .. repository.
 
 Basic Information
@@ -28,10 +28,10 @@ entities through a network, which can be applied to improve traffic flow in a
 city or region. In this project, we aim to use Ford-Fulkerson to enhance traffic 
 safety and reduce traffic congestion.
 
-We can represent city roads as a directed graph, each intersection is modeled as a 
-node, and roads are represented as edges with maximum capacities determined by 
-factors such as "the length of the road", "and the speed limitof the road", 
-"the number of lanes". The source node is designated as "home," and the 
+We can represent city roads as a directed graph; each intersection is modeled as a 
+node and roads are represented as edges with maximum capacities determined by 
+factors such as "the length of the road", "and the speed limit of the road", 
+"The number of lanes". The source node is designated as "home," and the 
 sink node is identified as "office."
 
 * Github Repository: [https://github.com/tsaiet/Optimizing-Traffic-Flow-with-Ford-Fulkerson]
@@ -46,11 +46,11 @@ Problem to Solve
 
 .. .. 1. The field or industry of the problem.
 .. 2. The physics and/or the mathematics behind the problem.
-.. 3. The algorithm or numerical method that should be applied for solving the
+.. 3. The algorithm or numerical method that should be applied to solve the
 ..    problem.
 
 Traffic congestion is a significant challenge in transportation and urban planning, 
-leading to many issues, including longer commute times, increased traffic accident rate.
+leading to many issues, including longer commute times and increased traffic accident rates.
 By optimizing traffic flow using maximum flow algorithms, the project seeks to mitigate 
 congestion and its associated problems. Ford-Fulkerson aims to optimize the flow of 
 vehicles through road networks. 
@@ -67,9 +67,9 @@ and government.
 System Architecture
 ===================
 
-.. .. Analyze how your system takes input, produces results, provide interface, and
-.. performs any other operations.  Describe the system's work flow.  You may
-.. consider to use a flow chart but it is not required.  Specify the constraints
+.. .. Analyze how your system takes input, produces results, provides an interface, and
+.. performs any other operations.  Describe the system's workflow.  You may
+.. consider using a flow chart, but it is not required.  Specify the constraints
 .. assumed in your system.  Describe the modularization of the system.
 
 .. image:: https://github.com/tsaiet/nsdhw_23au/blob/tsaiet-project-proposal/project/tsaiet/System%20Architecture.png
@@ -81,15 +81,15 @@ API Description
 .. system using both C++ and Python.  Describe how a user writes a script in the
 .. system.
 
-Users have the option to include the library by linking it into their own project.
+Users have the option to include the library by linking it to their own project.
 
 C++ users: 
 
-``#include "Ford-Fulkerson-library.hpp"``
+``#include "includes/Ford_Fulkerson.cpp"``
 
 Python users: 
 
-``import Ford-Fulkerson-library``
+``import Ford_Fulkerson as FF``
 
 Engineering Infrastructure
 ==========================
@@ -101,7 +101,7 @@ Engineering Infrastructure
 .. 3. Testing framework
 .. 4. Documentation
 
-.. .. Some of the above information should be included in the documentation in your
+.. .. Some of the above information should be included in the documentation of your
 .. software.
 
 .. .. You may use continuous integration, but it is not required.  If you use it,
@@ -113,55 +113,43 @@ Engineering Infrastructure
 4. Documentation: `README.rst`
 5. Continuous Integration: `Github Actions`
 
-Schedule
-========
+Installation
+==========
 
-.. .. Itemize the work to do and list them in a timeline.  Estimate the efforts of
-.. each item before the project starts.
+.. code-block:: bash
 
-.. .. The schedule is expected to be adjusted during the development.  A schedule to
-.. accurately predict everything in the development is impossible and unnecessary.
-.. But the initial estimate is important, for the baseline becomes concrete when
-.. we adjust the plan.
+    $ git clone https://github.com/tsaiet/Optimizing-Traffic-Flow-with-Ford-Fulkerson.git
+    $ cd Optimizing-Traffic-Flow-with-Ford-Fulkerson
+    $ chmod +x TODO.sh
+    $ ./TODO.sh
 
-.. .. To start, you can list the to-do items on a weekly basis and assume the
-.. development of the project takes 8 weeks:
+Usage
+==========
 
-* Planning phase (7 weeks from 11/06 to 12/18):
-Week 1 (11/06):
-----------
-- survey some references about Ford-Fulkerson
-- search the way to present the result
-- make the Python interface for input
+- C++ user:
+.. code-block:: bash
 
-Week 2 (11/13):
-----------
-- Finish the Ford-Fulkerson algorithm in C++
+    $ g++ main.cpp -o main.o
+    $ chmod +x main.o
+    $ ./main.o
 
-Week 3 (11/20):
-----------
-- Finish the Pytest and Pybind
 
-Week 4 (11/27):
-----------
-- Finish the presentation in Python
+- Python user:
+.. code-block:: bash
 
-Week 5 (12/04):
-----------
-- Write the Continuous Integration
+    $ python3 main.py
 
-Week 6 (12/11):
-----------
-- Buffer week
 
-Week 7 (12/18):
-----------
-- Prepare for presentation
+- Jupyter notebook user:
+.. code-block:: bash
+
+    $ jupyter notebook
+
+Choose main.ipynb and run :)
 
 References
 ==========
 
 .. List the external references for the information provided in the proposal.
 
-- https://github.com/tobyatgithub/pythonMaximumFlowTraffic
 - https://en.wikipedia.org/wiki/Ford-Fulkerson_algorithm
