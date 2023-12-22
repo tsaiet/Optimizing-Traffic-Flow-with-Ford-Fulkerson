@@ -12,7 +12,7 @@ set(
 )
 
 find_package(pybind11 REQUIRED)
-pybind11_add_module(Ford_Fulkerson ${Ford_Fulkerson_SOURCE_DIR}/includes/Ford_Fulkerson.cpp)
+pybind11_add_module(Ford_Fulkerson ${Ford_Fulkerson_SOURCE_DIR}/includes/Pybind.cpp)
 
 # instruction:
 # cmake -B build
