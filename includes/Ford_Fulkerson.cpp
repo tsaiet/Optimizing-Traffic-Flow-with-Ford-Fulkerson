@@ -3,14 +3,10 @@
 #include <string.h>
 #include <queue>
 #include <algorithm>
-#include <pybind11/stl.h>
-#include <pybind11/pybind11.h>
 #include <vector>
 
 #include "Graph.hpp"
 #include "MaxFlow.hpp"
-
-namespace py = pybind11;
 
 #define V 30
 
@@ -72,25 +68,4 @@ MaxFlow fordFulkerson(Graph &graph, int s, int t) {
     result.setMaxFlow(max_flow);
 
     return result;
-}
-
-PYBIND11_MODULE(Ford_Fulkerson, m) {
-	m.doc() = "Ford_Fulkerson Application";
-	
-	py::class_<Graph>(m, "Graph")
-		.def(py::init<int>())
-		.def("addEdge", &Graph::addEdge)
-		.def("removeEdge", &Graph::removeEdge)
-		.def("getEdge", &Graph::getEdge)
-		.def("modifyEdge", &Graph::modifyEdge);
-		
-	py::class_<MaxFlow>(m, "MaxFlow")
-		.def("addAugmentingPath", &MaxFlow::addAugmentingPath)
-		.def("setMaxFlow", &MaxFlow::setMaxFlow)
-		.def("getMaxFlow", &MaxFlow::getMaxFlow)
-		.def("getAugmentingPaths", &MaxFlow::getAugmentingPaths)
-		.def("getAugmentingPathsCapacities", &MaxFlow::getAugmentingPathsCapacities);
-	
-	m.def("bfs", &bfs);
-	m.def("fordFulkerson", &fordFulkerson);
 }
